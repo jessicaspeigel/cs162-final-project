@@ -37,12 +37,8 @@ Game::Game() {
     gameMenuItems.push_back("Move spaces");
     gameMenuItems.push_back("Drop out");
     gameMenu = new Menu("What would you like to do?", gameMenuItems);
-    // Create the space menu for the quad
+    // Create a bare bones space menu
     vector<string> spaceMenuItems;
-    spaceMenuItems.push_back(advisorsOffice->getName());
-    spaceMenuItems.push_back(library->getName());
-    spaceMenuItems.push_back(classroom->getName());
-    spaceMenuItems.push_back(computerLab->getName());
     spaceMenuItems.push_back("Return to main menu");
     spaceMenu = new Menu("Where would you like to go?", spaceMenuItems);
     // Start the game
@@ -71,7 +67,7 @@ void Game::startGame() {
     // Set the player's current location
     currentLocation = quad;
     // Show the menu
-    int menuChoice = 1;
+    int menuChoice = 0;
     // Start the program
     do {
         // Show the menu and get a choice
@@ -101,8 +97,41 @@ void Game::startGame() {
 void Game::takeTurn() {
     // Construct the menu for the space
     vector<string> spaceMenuItems;
-
-    // Remove 5 mental health points for taking a move
+    // Create a vector with pointers at the same indices
+    vector<Space*> spaces;
+    // Get the top pointer
+    if (currentLocation->getTop() != nullptr) {
+        spaceMenuItems.push_back(currentLocation->getTop()->getName());
+        spaces.push_back(currentLocation->getTop());
+    }
+    // Get the right pointer
+    if (currentLocation->getRight() != nullptr) {
+        spaceMenuItems.push_back(currentLocation->getRight()->getName());
+        spaces.push_back(currentLocation->getRight());
+    }
+    // Get the bottom pointer
+    if (currentLocation->getBottom() != nullptr) {
+        spaceMenuItems.push_back(currentLocation->getBottom()->getName());
+        spaces.push_back(currentLocation->getBottom());
+    }
+    // Get the left pointer
+    if (currentLocation->getLeft() != nullptr) {
+        spaceMenuItems.push_back(currentLocation->getLeft()->getName());
+        spaces.push_back(currentLocation->getLeft());
+    }
+    spaceMenuItems.push_back("Return to main menu");
+    // Set the menu items
+    spaceMenu->setMenuItems(spaceMenuItems);
+    // Show the menu and get a choice
+    int menuChoice = spaceMenu->showMenu();
+    if (menuChoice != spaceMenuItems.size()) {
+        // Remove 5 mental health points for taking a move
+        student->adjustPoints(-5);
+        // Move spaces (menu is 1 based, I know this is dumb)
+        spaces.at(menuChoice - 1)->enter(student);
+        // Update the location
+        currentLocation = spaces.at(menuChoice - 1);
+    }
 }
 
 /****************************************************
@@ -130,8 +159,7 @@ void Game::showProgress() {
 
 void Game::createBoard() {
     // Create the spaces
-    gym = new Quad;
-    gym->setName("Gym");
+    gym = new Gym;
     advisorsOffice = new Quad;
     advisorsOffice->setName("Advisor's Office");
     bar = new Quad;

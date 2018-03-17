@@ -14,6 +14,7 @@
 #include "Player.hpp"
 #include "Space.hpp"
 #include "Quad.hpp"
+#include "Gym.hpp"
 
 class Game {
     private:

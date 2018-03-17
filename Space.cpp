@@ -21,7 +21,15 @@ using std::string;
 ****************************************************/
 
 Space::Space(std::string name) {
+    // Set the space name
     setName(name);
+    // Exit string is the text used for exiting the space (inherited by all child classes)
+    exitString = "Exit " + this->getName();
+    // Create a bare bones space menu
+    vector<string> spaceMenuItems;
+    spaceMenuItems.push_back(exitString);
+    spaceMenu = new Menu(spaceMenuItems);
+    // Initialize the space pointers
     top = nullptr, bottom = nullptr, left = nullptr, right = nullptr;
 }
 
@@ -30,7 +38,8 @@ Space::Space(std::string name) {
 ****************************************************/
 
 Space::~Space() {
-
+    // Delete the menu
+    delete spaceMenu;
 }
 
 /****************************************************

@@ -7,9 +7,11 @@
 #ifndef CS162_FINAL_PROJECT_SPACE_HPP
 #define CS162_FINAL_PROJECT_SPACE_HPP
 
+#include <iostream>
 #include <string>
 
 #include "Player.hpp"
+#include "Menu.hpp"
 
 class Space {
     protected:
@@ -18,6 +20,8 @@ class Space {
         Space *left;
         Space *right;
         Space *bottom;
+        Menu* spaceMenu;
+        std::string exitString;
 
     public:
         Space(std::string name = "Space");
