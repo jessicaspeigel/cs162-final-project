@@ -6,6 +6,7 @@
 ****************************************************/
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <ctime>
@@ -19,17 +20,17 @@ using std::cin;
 using std::endl;
 using std::string;
 using std::vector;
+using std::ifstream;
+
+// Function prototypes for intro art
+void introArtReader();
+string getFileContents(ifstream &file);
 
 int main() {
     // Seed the random number generator
     srand(time(NULL));
-    // Say hi to the user
-    cout << "Welcome to the Computer Science Degree Simulator. Earn your degree the hard way!" << endl << endl;
-    cout << "Your goal is to get your degree without destroying your mental health." << endl << endl;
-    cout << "Accomplish your goal by doing homework in the computer lab and turning it in in the classroom for credits." << endl;
-    cout << "Once you have 60 credits, you can apply for graduation in your advisor's office, but watch out for hazards!" << endl;
-    cout << "You begin the game with 100 mental health points which will deplete as you move through the spaces on campus and take certain actions." << endl << endl;
-    cout << "Good luck!" << endl << endl;
+    // Output the intro art and instructions
+    introArtReader();
     // Get the main menu ready
     vector<string> mainMenuItems = {"Play", "Exit"};
     Menu mainMenu(mainMenuItems);
@@ -50,4 +51,61 @@ int main() {
     } while (menuChoice != 2); // Choosing 2 equals quit
 
     return 0;
+}
+
+/****************************************************
+** Citation: This code is modified from
+** http://www.cplusplus.com/forum/general/58945/user
+** TheMassiveChipmunk
+**
+** Reads the intro ascii art from a file using
+** getFileContents(), then outputs the file lines
+** to the console and closes the file
+****************************************************/
+void introArtReader()
+{
+    // Open file
+    ifstream reader;
+    reader.open("IntroArt.txt");
+
+    // Get file
+    string introArt = getFileContents(reader);
+
+    //Print it to the screen
+    if (introArt != "ERROR") {
+        cout << introArt << endl;
+    } else {
+        cout << "Error" << endl;
+    }
+
+    //Close file
+    reader.close();
+}
+
+/***************************************************
+** Checks to make sure the file is available and if
+** it is get the appropriately space and /n art
+****************************************************/
+string getFileContents(ifstream &file)
+{
+    //All lines
+    string lines = "";
+
+    //Check if everything is good
+    if (file)
+    {
+        while (file.good())
+        {
+            string tempLine;                //Temp line
+            getline(file, tempLine);        //Get temp line
+            tempLine += "\n";               //Add newline character
+
+            lines += tempLine;              //Add newline
+        }
+        return lines;
+    }
+    else                           //Return error
+    {
+        return "ERROR";
+    }
 }

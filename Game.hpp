@@ -26,12 +26,17 @@ class Game {
         Space* taOffice;
         Space* classroom;
         Space* cafe;
+        Space* currentLocation;
         Player* student;
+        Menu* gameMenu;
+        Menu* spaceMenu;
         void createBoard();
         void destroyBoard();
         void startGame();
         void endGame();
         void printBoard();
+        void showProgress();
+        void takeTurn();
 
     public:
         Game();

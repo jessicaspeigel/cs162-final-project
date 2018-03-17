@@ -35,3 +35,29 @@ Player::~Player() {
 /****************************************************
 ** GETTERS / SETTERS
 ****************************************************/
+
+int Player::getPoints() {
+    return points;
+}
+
+int Player::getCredits() {
+    return credits;
+}
+
+/****************************************************
+** Description: Adjusts points by either a positive
+** or negative amount.
+****************************************************/
+
+void Player::adjustPoints(int offset) {
+    this->points += offset;
+}
+
+/****************************************************
+** Description: Adjusts credits by either a positive
+** or negative amount.
+****************************************************/
+
+void Player::adjustCredits(int offset) {
+    this->credits += offset;
+}

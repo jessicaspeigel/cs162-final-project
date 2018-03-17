@@ -21,7 +21,10 @@ class Player {
     public:
         Player(int points = 100, int credits = 0);
         virtual ~Player();
-
+        int getPoints();
+        void adjustPoints(int offset);
+        int getCredits();
+        void adjustCredits(int offset);
 };
 
 

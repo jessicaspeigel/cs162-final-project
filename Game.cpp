@@ -7,6 +7,7 @@
 
 #include "Game.hpp"
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -16,14 +17,34 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
+using std::setw;
+using std::left;
 
 /****************************************************
 ** CONSTRUCTORS
 ****************************************************/
 
 Game::Game() {
+    // Create the player
+    student = new Player;
     // Generate the board
     createBoard();
+    // Create the game menu
+    vector<string> gameMenuItems;
+    gameMenuItems.push_back("See the campus map");
+    gameMenuItems.push_back("See inventory");
+    gameMenuItems.push_back("See degree progress");
+    gameMenuItems.push_back("Move spaces");
+    gameMenuItems.push_back("Drop out");
+    gameMenu = new Menu("What would you like to do?", gameMenuItems);
+    // Create the space menu for the quad
+    vector<string> spaceMenuItems;
+    spaceMenuItems.push_back(advisorsOffice->getName());
+    spaceMenuItems.push_back(library->getName());
+    spaceMenuItems.push_back(classroom->getName());
+    spaceMenuItems.push_back(computerLab->getName());
+    spaceMenuItems.push_back("Return to main menu");
+    spaceMenu = new Menu("Where would you like to go?", spaceMenuItems);
     // Start the game
     startGame();
 }
@@ -33,6 +54,12 @@ Game::Game() {
 ****************************************************/
 
 Game::~Game() {
+    // Kill the student
+    delete student;
+    // Delete the menus
+    delete gameMenu;
+    delete spaceMenu;
+    // Destroy the board
     destroyBoard();
 }
 
@@ -41,16 +68,59 @@ Game::~Game() {
 ****************************************************/
 
 void Game::startGame() {
-    printBoard();
+    // Set the player's current location
+    currentLocation = quad;
+    // Show the menu
+    int menuChoice = 1;
+    // Start the program
+    do {
+        // Show the menu and get a choice
+        menuChoice = gameMenu->showMenu();
+        if (menuChoice != 5) {
+            switch (menuChoice) {
+                case 1 : // Show campus map
+                    printBoard();
+                    break;
+                case 2 : // Show inventory
+                    break;
+                case 3 : // Show degree progress
+                    showProgress();
+                    break;
+                case 4 : // Move spaces
+                    takeTurn();
+                    break;
+            }
+        }
+    } while (menuChoice != 5); // Choosing 5 equals quit
 }
 
 /****************************************************
-** Description: ends the game
+** Description: Takes a turn by moving spaces
+****************************************************/
+
+void Game::takeTurn() {
+    // Construct the menu for the space
+    vector<string> spaceMenuItems;
+
+    // Remove 5 mental health points for taking a move
+}
+
+/****************************************************
+** Description: Ends the game
 ****************************************************/
 
 void Game::endGame() {
-    // Print a separator
 
+}
+
+/****************************************************
+** Description: Prints the user's progress
+****************************************************/
+
+void Game::showProgress() {
+    cout << "Your degree progress:" << endl;
+    cout << "Mental health points: " << student->getPoints() << endl;
+    cout << "Credits: " << student->getCredits() << endl << endl;
 }
 
 /****************************************************
@@ -74,7 +144,7 @@ void Game::createBoard() {
     taOffice = new Quad;
     taOffice->setName("TA's Office");
     classroom = new Quad;
-    classroom->setName("classroom");
+    classroom->setName("Classroom");
     cafe = new Quad;
     cafe->setName("Cafe");
     // Link the gym
@@ -107,6 +177,9 @@ void Game::createBoard() {
     classroom->setTop(quad);
     classroom->setRight(cafe);
     classroom->setLeft(taOffice);
+    // Link the cafe
+    cafe->setTop(library);
+    cafe->setLeft(classroom);
 }
 
 /****************************************************
@@ -131,20 +204,57 @@ void Game::destroyBoard() {
 ****************************************************/
 
 void Game::printBoard() {
+    // Constant for column width
+    const int COL_WIDTH = 21;
+    const char EDGE_CHAR = '|';
     // Start with the gym in the top right
-    Space* s = gym;
-    Space* nextCol = s->getRight();
-    Space* nextRow = s->getBottom();
-    do {
-        cout << s->getName() << endl;
-        s = nextCol;
-        if (s == nullptr) {
-            // Move to the next row
-            s = nextRow;
-            nextCol = s->getRight();
-            nextRow = s->getBottom();
-        } else {
-            nextCol = s->getRight();
+    Space* start = gym;
+    Space* nextCol;
+    Space* nextRow = start;
+    // Print the first separator line
+    cout << "*--------------------------------------------------------------------*" << endl;
+    while (nextRow != nullptr) {
+        // Loop through the rows
+        nextCol = nextRow;
+        while (nextCol != nullptr) {
+            // Loop through the columns
+            // Print the name of the room
+            string outputName;
+            if (currentLocation == nextCol) {
+                // We'll add an asterisk to mark the player's current location
+                outputName = nextCol->getName() + " (*)";
+            } else {
+                outputName = nextCol->getName();
+            }
+            cout << EDGE_CHAR << left << " " << setw(COL_WIDTH) << outputName;
+            // Print a spacer line
+            // Set the next column
+            nextCol = nextCol->getRight();
         }
-    } while (s != nullptr);
+        // Print the edge char for the last column and print a separator line
+        cout << EDGE_CHAR << endl;
+        cout << "*--------------------------------------------------------------------*" << endl;
+        // Set the next row
+        nextRow = nextRow->getBottom();
+    }
+    cout << "(*) You are in the " << currentLocation->getName() << endl;
+    cout << endl;
 }
+
+/*
+
+*-----------------------------------------------------------------*
+|                     |                     |                     |
+| Gym                 | Advisor's Office    | Bar                 |
+| (you are here)      |                     |                     |
+*-----------------------------------------------------------------*
+|                     |                     |                     |
+| Computer Lab        | Quad                | Library             |
+|                     |                     |                     |
+*-----------------------------------------------------------------*
+|                     |                     |                     |
+| TA's Office         | Classroom           | Cafe                |
+|                     |                     |                     |
+*-----------------------------------------------------------------*
+
+ */

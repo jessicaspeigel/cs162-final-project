@@ -1,0 +1,31 @@
+
+*---------------------------------------------------------------------------------*
+|                                                                                 |
+|     ██████╗███████╗    ██████╗ ███████╗ ██████╗ ██████╗ ███████╗███████╗        |
+|    ██╔════╝██╔════╝    ██╔══██╗██╔════╝██╔════╝ ██╔══██╗██╔════╝██╔════╝        |
+|    ██║     ███████╗    ██║  ██║█████╗  ██║  ███╗██████╔╝█████╗  █████╗          |
+|    ██║     ╚════██║    ██║  ██║██╔══╝  ██║   ██║██╔══██╗██╔══╝  ██╔══╝          |
+|    ╚██████╗███████║    ██████╔╝███████╗╚██████╔╝██║  ██║███████╗███████╗        |
+|     ╚═════╝╚══════╝    ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝        |
+|                                                                                 |
+|    ███████╗██╗███╗   ███╗██╗   ██╗██╗      █████╗ ████████╗ ██████╗ ██████╗     |
+|    ██╔════╝██║████╗ ████║██║   ██║██║     ██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗    |
+|    ███████╗██║██╔████╔██║██║   ██║██║     ███████║   ██║   ██║   ██║██████╔╝    |
+|    ╚════██║██║██║╚██╔╝██║██║   ██║██║     ██╔══██║   ██║   ██║   ██║██╔══██╗    |
+|    ███████║██║██║ ╚═╝ ██║╚██████╔╝███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║    |
+|    ╚══════╝╚═╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝    |
+|                                                                                 |
+*---------------------------------------------------------------------------------*
+
+Welcome to the Computer Science Degree Simulator. Earn your degree the hard way!
+
+Your goal is to get your degree without destroying your mental health. Earn credits
+by doing homework in the computer lab and turning it in in the classroom. Once you
+have 60 credits, you can apply for graduation in your advisor's office, but watch
+out for hazards!
+
+You begin the game with 100 mental health points which will deplete as you move
+through the spaces on campus and take certain actions. Collect items that will help
+you accomplish your goal along the way.
+
+Good luck!
