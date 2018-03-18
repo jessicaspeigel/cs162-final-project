@@ -15,6 +15,9 @@
 #include "Space.hpp"
 #include "Quad.hpp"
 #include "Gym.hpp"
+#include "Cafe.hpp"
+
+class Inventory;
 
 class Game {
     private:

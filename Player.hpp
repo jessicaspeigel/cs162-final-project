@@ -9,14 +9,14 @@
 
 #include <iostream>
 #include <vector>
-
-enum InventoryItem {APPLE, EXTRA_CREDIT, HOMEWORK, DIPLOMA};
+#include "Inventory.hpp"
 
 class Player {
     private:
         int points;
         int credits;
-        std::vector<InventoryItem> inventory;
+        Inventory* inventory;
+
 
     public:
         Player(int points = 100, int credits = 0);
@@ -25,6 +25,7 @@ class Player {
         void adjustPoints(int offset);
         int getCredits();
         void adjustCredits(int offset);
+        Inventory* getInventory();
 };
 
 

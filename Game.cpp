@@ -128,7 +128,7 @@ void Game::takeTurn() {
         // Remove 5 mental health points for taking a move
         student->adjustPoints(-5);
         // Move spaces (menu is 1 based, I know this is dumb)
-        spaces.at(menuChoice - 1)->enter(student);
+        spaces.at(menuChoice - 1)->enter();
         // Update the location
         currentLocation = spaces.at(menuChoice - 1);
     }
@@ -159,22 +159,21 @@ void Game::showProgress() {
 
 void Game::createBoard() {
     // Create the spaces
-    gym = new Gym;
-    advisorsOffice = new Quad;
+    gym = new Gym(student);
+    advisorsOffice = new Quad(student);
     advisorsOffice->setName("Advisor's Office");
-    bar = new Quad;
+    bar = new Quad(student);
     bar->setName("Bar");
-    computerLab = new Quad;
+    computerLab = new Quad(student);
     computerLab->setName("Computer Lab");
-    quad = new Quad;
-    library = new Quad;
+    quad = new Quad(student);
+    library = new Quad(student);
     library->setName("Library");
-    taOffice = new Quad;
+    taOffice = new Quad(student);
     taOffice->setName("TA's Office");
-    classroom = new Quad;
+    classroom = new Quad(student);
     classroom->setName("Classroom");
-    cafe = new Quad;
-    cafe->setName("Cafe");
+    cafe = new Cafe(student);
     // Link the gym
     gym->setRight(advisorsOffice);
     gym->setBottom(computerLab);

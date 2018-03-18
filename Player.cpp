@@ -22,6 +22,7 @@ using std::string;
 Player::Player(int points, int credits) {
     this->points = points;
     this->credits = credits;
+    inventory = new Inventory();
 }
 
 /****************************************************
@@ -29,7 +30,7 @@ Player::Player(int points, int credits) {
 ****************************************************/
 
 Player::~Player() {
-
+    delete inventory;
 }
 
 /****************************************************
@@ -42,6 +43,10 @@ int Player::getPoints() {
 
 int Player::getCredits() {
     return credits;
+}
+
+Inventory* Player::getInventory() {
+    return inventory;
 }
 
 /****************************************************

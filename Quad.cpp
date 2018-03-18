@@ -14,7 +14,7 @@ using std::endl;
 ** CONSTRUCTORS
 ****************************************************/
 
-Quad::Quad() : Space("Quad") {
+Quad::Quad(Player* player) : Space("Quad", player) {
 
 }
 
@@ -30,6 +30,6 @@ Quad::~Quad() {
 ** Description: the player enters the space
 ****************************************************/
 
-void Quad::enter(Player *p) {
+void Quad::enter() {
     cout << "Entered " << this->getName() << endl;
 }

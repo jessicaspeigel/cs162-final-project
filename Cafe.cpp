@@ -2,9 +2,9 @@
 ** Author: Jessica Speigel
 ** Assignment: cs162_final_project
 ** Date: 03/17/2018
-** Description: Gym implementation file
+** Description: Cafe implementation file
 ****************************************************/
-#include "Gym.hpp"
+#include "Cafe.hpp"
 
 using std::cin;
 using std::cout;
@@ -16,10 +16,10 @@ using std::vector;
 ** CONSTRUCTORS
 ****************************************************/
 
-Gym::Gym(Player* player) : Space("Gym", player) {
-    // Create the gym menu
+Cafe::Cafe(Player *player) : Space("Cafe", player) {
+    // Create the Cafe menu
     vector<string> spaceMenuItems;
-    spaceMenuItems.push_back("Fit in a workout between classes?");
+    spaceMenuItems.push_back("Buy coffee?");
     spaceMenuItems.push_back(exitString);
     string promptText = "You entered the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
@@ -30,7 +30,7 @@ Gym::Gym(Player* player) : Space("Gym", player) {
 ** DESTRUCTORS
 ****************************************************/
 
-Gym::~Gym() {
+Cafe::~Cafe() {
 
 }
 
@@ -38,12 +38,12 @@ Gym::~Gym() {
 ** Description: the player enters the space
 ****************************************************/
 
-void Gym::enter() {
+void Cafe::enter() {
     Player* p = this->getPlayer();
-    // Show the gym menu
+    // Show the Cafe menu
     int menuChoice = spaceMenu->showMenu();
     if (menuChoice == 1) {
-        cout << "You had a great workout, you earned 10 mental health points!" << endl;
-        p->adjustPoints(10);
+        cout << "That coffee woke you right up, you earned 5 mental health points!" << endl;
+        p->adjustPoints(5);
     }
 }

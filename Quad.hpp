@@ -13,9 +13,9 @@ class Quad: public Space {
 private:
 
 public:
-    Quad();
+    Quad(Player* player);
     ~Quad();
-    void enter(Player *p);
+    void enter();
 };
 
 

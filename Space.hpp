@@ -13,6 +13,8 @@
 #include "Player.hpp"
 #include "Menu.hpp"
 
+class Inventory;
+
 class Space {
     protected:
         std::string name;
@@ -21,12 +23,13 @@ class Space {
         Space *right;
         Space *bottom;
         Menu* spaceMenu;
+        Player* player;
         std::string exitString;
 
     public:
-        Space(std::string name = "Space");
+        Space(std::string name = "Space", Player* player = nullptr);
         virtual ~Space();
-        virtual void enter(Player *p) = 0;
+        virtual void enter() = 0;
         void setTop(Space *ptr);
         void setBottom(Space *ptr);
         void setRight(Space *ptr);
@@ -37,6 +40,8 @@ class Space {
         Space *getLeft();
         std::string getName();
         void setName(std::string name);
+        Player* getPlayer();
+        void setPlayer(Player* p);
 };
 
 

@@ -20,7 +20,9 @@ using std::string;
 ** CONSTRUCTORS
 ****************************************************/
 
-Space::Space(std::string name) {
+Space::Space(string name, Player* player) {
+    // Set the player
+    setPlayer(player);
     // Set the space name
     setName(name);
     // Exit string is the text used for exiting the space (inherited by all child classes)
@@ -84,4 +86,12 @@ Space *Space::getRight() {
 
 Space *Space::getLeft() {
     return left;
+}
+
+Player *Space::getPlayer() {
+    return this->player;
+}
+
+void Space::setPlayer(Player *p) {
+    this->player = p;
 }
