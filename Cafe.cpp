@@ -47,3 +47,11 @@ void Cafe::enter() {
         p->adjustPoints(5);
     }
 }
+
+/****************************************************
+** Description: Generate random inventory items
+****************************************************/
+
+void Cafe::generateInventoryItems() {
+    // The cafe doesn't generate inventory items
+}

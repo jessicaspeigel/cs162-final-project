@@ -16,6 +16,7 @@ public:
     Gym(Player* player);
     ~Gym();
     void enter();
+    void generateInventoryItems();
 };
 
 

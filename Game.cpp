@@ -167,8 +167,7 @@ void Game::createBoard() {
     computerLab = new Quad(student);
     computerLab->setName("Computer Lab");
     quad = new Quad(student);
-    library = new Quad(student);
-    library->setName("Library");
+    library = new Library(student);
     taOffice = new Quad(student);
     taOffice->setName("TA's Office");
     classroom = new Quad(student);

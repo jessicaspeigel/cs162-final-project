@@ -21,9 +21,7 @@ private:
     InventoryItem* tail;
     void setHead(InventoryItem* n);
     void setTail(InventoryItem* n);
-    bool deleteItemByValue(std::string val);
-    void addToHead(std::string val);
-    void addToTail(std::string val);
+    void addToTail(std::string val, int frequency);
     InventoryItem* getHead();
     InventoryItem* getTail();
     void clearList();
@@ -37,7 +35,7 @@ public:
     void printItem(InventoryItem* item);
     void printInventory();
     bool addItem(std::string val, int count = 1);
-    bool registerItem(std::string item);
+    bool registerItem(std::string item, int frequency = 50);
     InventoryItem* findItemByValue(std::string val);
 
 };

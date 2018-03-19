@@ -16,6 +16,7 @@ public:
     Cafe(Player *player = nullptr);
     ~Cafe();
     void enter();
+    void generateInventoryItems();
 };
 
 #endif //CS162_FINAL_PROJECT_CAFE_HPP

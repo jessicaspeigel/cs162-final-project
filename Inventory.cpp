@@ -90,6 +90,19 @@ int Inventory::getMaxItems() {
 
 int Inventory::getInventoryCount() {
     int count = 0;
+    // Loop through all the items in the inventory to get a total
+    InventoryItem* inventoryItemPtr = nullptr;
+    // Don't do anything if we're dealing with an empty list
+    if (getHead() != nullptr) {
+        // Initialize inventoryItemPtr to head
+        inventoryItemPtr = getHead();
+        while (inventoryItemPtr != nullptr) {
+            // Update the count
+            count += inventoryItemPtr->getCount();
+            // Set the current pointer to the next one
+            inventoryItemPtr = inventoryItemPtr->getNext();
+        }
+    }
     return count;
 }
 
@@ -118,13 +131,13 @@ bool Inventory::addItem(string val, int count) {
 ** inventory.
 ****************************************************/
 
-bool Inventory::registerItem(string item) {
+bool Inventory::registerItem(string item, int frequency) {
     bool registerResult = false;
     // Check to see if the item exists first
     InventoryItem* i = findItemByValue(item);
     if (i == nullptr) {
         // The item doesn't exist in the inventory
-        addToTail(item);
+        addToTail(item, frequency);
         registerResult = true;
     }
     // Return the result of the operation
@@ -136,8 +149,8 @@ bool Inventory::registerItem(string item) {
 ** the item if it exists, returns nullptr otherwise.
 ****************************************************/
 
-InventoryItem* Inventory::findItemByValue(std::string val) {
-    // Keep track of the current InventoryItem and the prev InventoryItem
+InventoryItem* Inventory::findItemByValue(string val) {
+    // Keep track of the current InventoryItem
     InventoryItem* inventoryItemPtr = nullptr;
     // Don't do anything if we're dealing with an empty list
     if (getHead() != nullptr) {
@@ -190,51 +203,6 @@ void Inventory::setHead(InventoryItem *n) {
 }
 
 /****************************************************
-** Description: Private function to delete a single
-** item from the list. Takes a pointer to the item
-** to delete. Does NOT reset head and tail. Returns
-** false for an empty list
-****************************************************/
-
-bool Inventory::deleteItemByValue(string val) {
-    // Variable for result
-    bool deleteResult = false;
-    // Keep track of the current InventoryItem and the prev InventoryItem
-    InventoryItem* InventoryItemPtr = nullptr;
-    InventoryItem* prevInventoryItemPtr = nullptr;
-    // Don't do anything if we're dealing with an empty list
-    if (getHead() != nullptr) {
-        // Initialize InventoryItemPtr to head
-        InventoryItemPtr = getHead();
-        while (InventoryItemPtr != nullptr && InventoryItemPtr->getValue() != val) {
-            // Set the prev pointer to the current pointer
-            prevInventoryItemPtr = InventoryItemPtr;
-            // Set the current pointer to the next one
-            InventoryItemPtr = InventoryItemPtr->getNext();
-        }
-        // See if there's a matching InventoryItem to delete
-        if (InventoryItemPtr != nullptr) {
-            // Set the prev pointer of the next item in the list to the one before the item to be deleted
-            InventoryItem* newNext = nullptr;
-            newNext = InventoryItemPtr->getNext();
-            if (newNext != nullptr) {
-                newNext->setPrev(prevInventoryItemPtr);
-            }
-            // Set the next pointer of the previous item in the list to the one after the item to be deleted
-            if (prevInventoryItemPtr != nullptr) {
-                prevInventoryItemPtr->setNext(InventoryItemPtr->getNext());
-            }
-            // Delete the item
-            delete InventoryItemPtr;
-            // Set the result to true
-            deleteResult = true;
-        }
-    }
-
-    return deleteResult;
-}
-
-/****************************************************
 ** Description: Private function to set the last
 ** item in the list. Takes a pointer to the new
 ** tail.
@@ -255,29 +223,13 @@ void Inventory::setTail(InventoryItem *n) {
 }
 
 /****************************************************
-** Description: Adds a new InventoryItem to the head
-** of the list.
-****************************************************/
-
-void Inventory::addToHead(string val) {
-    // This constructor instantiates with next and prev set to nullptr
-    InventoryItem* n = new InventoryItem(val);
-    // Set the head
-    setHead(n);
-    // Set the tail if none exists
-    if (getTail() == nullptr) {
-        setTail(n);
-    }
-}
-
-/****************************************************
 ** Description: Adds a new InventoryItem to the tail
 ** of the list.
 ****************************************************/
 
-void Inventory::addToTail(string val) {
+void Inventory::addToTail(string val, int frequency) {
     // This constructor instantiates with next and prev set to nullptr
-    InventoryItem* n = new InventoryItem(val);
+    InventoryItem* n = new InventoryItem(val, frequency);
     // Set the tail to the new InventoryItem
     setTail(n);
     // Set the head if none exists

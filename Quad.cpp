@@ -27,9 +27,17 @@ Quad::~Quad() {
 }
 
 /****************************************************
-** Description: the player enters the space
+** Description: The player enters the space
 ****************************************************/
 
 void Quad::enter() {
     cout << "Entered " << this->getName() << endl;
+}
+
+/****************************************************
+** Description: Generate random inventory items
+****************************************************/
+
+void Quad::generateInventoryItems() {
+    // The quad doesn't generate any items
 }

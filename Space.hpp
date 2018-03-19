@@ -30,6 +30,7 @@ class Space {
         Space(std::string name = "Space", Player* player = nullptr);
         virtual ~Space();
         virtual void enter() = 0;
+        virtual void generateInventoryItems() = 0;
         void setTop(Space *ptr);
         void setBottom(Space *ptr);
         void setRight(Space *ptr);

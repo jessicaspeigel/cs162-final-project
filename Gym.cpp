@@ -47,3 +47,11 @@ void Gym::enter() {
         p->adjustPoints(10);
     }
 }
+
+/****************************************************
+** Description: Generate random inventory items
+****************************************************/
+
+void Gym::generateInventoryItems() {
+    // The gym doesn't generate any inventory items
+}

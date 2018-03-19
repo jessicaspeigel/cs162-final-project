@@ -11,18 +11,12 @@ using std::cin;
 using std::endl;
 using std::string;
 
-InventoryItem::InventoryItem(string val, int count, InventoryItem *next, InventoryItem *prev) {
+InventoryItem::InventoryItem(std::string val, int freq, int count, InventoryItem *next, InventoryItem *prev) {
     setValue(val);
     setCount(count);
+    setFrequency(freq);
     setNext(next);
     setPrev(prev);
-}
-
-InventoryItem::InventoryItem(string val, int count) {
-    setValue(val);
-    setCount(count);
-    setNext(nullptr);
-    setPrev(nullptr);
 }
 
 string InventoryItem::getValue() {
@@ -55,4 +49,12 @@ int InventoryItem::getCount() {
 
 void InventoryItem::setCount(int count) {
     this->count = count;
+}
+
+int InventoryItem::getFrequency() {
+    return this->frequency;
+}
+
+void InventoryItem::setFrequency(int freq) {
+    this->frequency = freq;
 }

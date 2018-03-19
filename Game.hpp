@@ -16,6 +16,7 @@
 #include "Quad.hpp"
 #include "Gym.hpp"
 #include "Cafe.hpp"
+#include "Library.hpp"
 
 class Inventory;
 

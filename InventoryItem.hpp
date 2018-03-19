@@ -15,16 +15,18 @@ class InventoryItem {
 private:
     std::string val;
     int count;
+    int frequency;
     InventoryItem* next;
     InventoryItem* prev;
 
 public:
-    InventoryItem(std::string val, int count, InventoryItem *next, InventoryItem *prev);
-    InventoryItem(std::string val, int count = 0);
+    InventoryItem(std::string val, int freq = 50, int count = 0, InventoryItem *next = nullptr, InventoryItem *prev = nullptr);
     std::string getValue();
     void setValue(std::string val);
     int getCount();
     void setCount(int count);
+    int getFrequency();
+    void setFrequency(int freq);
     InventoryItem* getNext();
     void setNext(InventoryItem *next);
     InventoryItem* getPrev();

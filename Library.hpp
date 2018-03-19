@@ -1,23 +1,22 @@
 /****************************************************
 ** Author: Jessica Speigel
 ** Assignment: cs162_final_project
-** Date: 03/15/2018
-** Description: Quad header file
+** Date: 03/18/2018
+** Description: 
 ****************************************************/
-#ifndef CS162_FINAL_PROJECT_QUAD_HPP
-#define CS162_FINAL_PROJECT_QUAD_HPP
+#ifndef CS162_FINAL_PROJECT_LIBRARY_HPP
+#define CS162_FINAL_PROJECT_LIBRARY_HPP
 
 #include "Space.hpp"
 
-class Quad: public Space {
+class Library : public Space {
 private:
 
 public:
-    Quad(Player* player);
-    ~Quad();
+    Library(Player* player);
+    ~Library();
     void enter();
     void generateInventoryItems();
 };
 
-
-#endif //CS162_FINAL_PROJECT_QUAD_HPP
+#endif //CS162_FINAL_PROJECT_LIBRARY_HPP
