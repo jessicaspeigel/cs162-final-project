@@ -4,7 +4,7 @@
 ** Date: 03/18/2018
 ** Description: 
 ****************************************************/
-#include "Library.hpp"
+#include "ComputerLab.hpp"
 
 using std::cin;
 using std::cout;
@@ -16,25 +16,26 @@ using std::vector;
 ** CONSTRUCTORS
 ****************************************************/
 
-Library::Library(Player* player) : Space("Library", player) {
-    // Create the Library menu
+ComputerLab::ComputerLab(Player* player) : Space("Computer Lab", player) {
+    // Create the ComputerLab menu
     vector<string> spaceMenuItems;
-    spaceMenuItems.push_back("Study");
+    spaceMenuItems.push_back("Do homework");
     spaceMenuItems.push_back(exitString);
     string promptText = "You entered the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
     spaceMenu->setMenuItems(spaceMenuItems);
-    // Register the inventory items that can appear in this space (apple and extra credit)
+    // Register the inventory items that can appear in this space (floppy disk and extra credit)
     Inventory* i = player->getInventory();
-    i->registerItem("apple", 50);
+    i->registerItem("floppy disk", 20);
     i->registerItem("extra credit", 50);
+    i->registerItem("homework", 100);
 }
 
 /****************************************************
 ** DESTRUCTORS
 ****************************************************/
 
-Library::~Library() {
+ComputerLab::~ComputerLab() {
 
 }
 
@@ -42,13 +43,14 @@ Library::~Library() {
 ** Description: The player enters the space
 ****************************************************/
 
-void Library::enter() {
+void ComputerLab::enter() {
     Player* p = this->getPlayer();
-    // Show the Library menu
+    // Show the ComputerLab menu
     int menuChoice = spaceMenu->showMenu();
     if (menuChoice == 1) {
-        cout << "You had a great study session, but you're exhausted and lost 5 mental health points." << endl;
-        p->adjustPoints(-5);
+        cout << "Great work, homework has been added to your inventory! You spent 10 mental health points." << endl;
+        p->adjustPoints(-10);
+        p->getInventory()->addItem("homework");
         generateInventoryItems();
     }
 }
@@ -57,25 +59,25 @@ void Library::enter() {
 ** Description: Generate random inventory items
 ****************************************************/
 
-void Library::generateInventoryItems() {
+void ComputerLab::generateInventoryItems() {
     // Apples and extra credit can be generated here
     // Get the player's inventory
     Inventory* i = player->getInventory();
-    InventoryItem* apples = i->findItemByValue("apple");
+    InventoryItem* floppyDisk = i->findItemByValue("floppy disk");
     InventoryItem* extraCredit = i->findItemByValue("extra credit");
-    // See if we should generate an apple
+    // See if we should generate a floppy disk
     if (i->getInventoryCount() < i->getMaxItems()) {
-        int appleChance = rand() % 100 + 1;
-        if (appleChance <= apples->getFrequency()) {
+        int floppyDiskChance = rand() % 100 + 1;
+        if (floppyDiskChance <= floppyDisk->getFrequency()) {
             i->addItem("apple");
             // Only use plural if it's appropriate
-            string applePluralForm;
-            if (apples->getCount() > 1) {
-                applePluralForm = " apples";
+            string fdPluralForm;
+            if (floppyDisk->getCount() > 1) {
+                fdPluralForm = " floppy disks";
             } else {
-                applePluralForm = " apple";
+                fdPluralForm = " floppy disk";
             }
-            cout << "Lucky you! You found an apple in the " << this->getName() << ". You now have " << apples->getCount() << applePluralForm << "." << endl;
+            cout << "Lucky you! You found a floppy disk in the " << this->getName() << ". You now have " << floppyDisk->getCount() << fdPluralForm << "." << endl;
         }
     }
     // See if we should generate extra credit
@@ -85,7 +87,7 @@ void Library::generateInventoryItems() {
             i->addItem("extra credit");
             // Only use plural if it's appropriate
             string ecPluralForm;
-            if (apples->getCount() > 1) {
+            if (extraCredit->getCount() > 1) {
                 ecPluralForm = " chances";
             } else {
                 ecPluralForm = " chance";
@@ -94,3 +96,4 @@ void Library::generateInventoryItems() {
         }
     }
 }
+

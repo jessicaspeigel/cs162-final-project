@@ -10,6 +10,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+using std::toupper;
 
 /****************************************************
 ** Constructors / Destructor
@@ -60,13 +61,16 @@ void Inventory::printInventory() {
     InventoryItem* n = getHead();
     // Print a message if the list is empty
     if (n == nullptr) {
-        cout << "The inventory is empty." << endl;
-    }
-    while (n != nullptr) {
-        // Print the value
-        printItem(n);
-        // Move on to the next
-        n = n->getNext();
+        cout << "Your inventory is empty." << endl;
+    } else {
+        cout << "Your inventory contains the following items:" << endl;
+        while (n != nullptr) {
+            // Print the value
+            printItem(n);
+            // Move on to the next
+            n = n->getNext();
+        }
+        cout << "You have " << getInventoryCount() << " out of a possible " << getMaxItems() << " items." << endl;
     }
 }
 

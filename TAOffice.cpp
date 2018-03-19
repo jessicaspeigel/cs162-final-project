@@ -4,7 +4,7 @@
 ** Date: 03/18/2018
 ** Description: 
 ****************************************************/
-#include "Library.hpp"
+#include "TAOffice.hpp"
 
 using std::cin;
 using std::cout;
@@ -16,10 +16,10 @@ using std::vector;
 ** CONSTRUCTORS
 ****************************************************/
 
-Library::Library(Player* player) : Space("Library", player) {
-    // Create the Library menu
+TAOffice::TAOffice(Player* player) : Space("TA's Office", player) {
+    // Create the TAOffice menu
     vector<string> spaceMenuItems;
-    spaceMenuItems.push_back("Study");
+    spaceMenuItems.push_back("Attend office hours");
     spaceMenuItems.push_back(exitString);
     string promptText = "You entered the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
@@ -34,7 +34,7 @@ Library::Library(Player* player) : Space("Library", player) {
 ** DESTRUCTORS
 ****************************************************/
 
-Library::~Library() {
+TAOffice::~TAOffice() {
 
 }
 
@@ -42,12 +42,12 @@ Library::~Library() {
 ** Description: The player enters the space
 ****************************************************/
 
-void Library::enter() {
+void TAOffice::enter() {
     Player* p = this->getPlayer();
-    // Show the Library menu
+    // Show the TAOffice menu
     int menuChoice = spaceMenu->showMenu();
     if (menuChoice == 1) {
-        cout << "You had a great study session, but you're exhausted and lost 5 mental health points." << endl;
+        cout << "Your TA answered all your questions, but you're exhausted and lost 5 mental health points." << endl;
         p->adjustPoints(-5);
         generateInventoryItems();
     }
@@ -57,7 +57,7 @@ void Library::enter() {
 ** Description: Generate random inventory items
 ****************************************************/
 
-void Library::generateInventoryItems() {
+void TAOffice::generateInventoryItems() {
     // Apples and extra credit can be generated here
     // Get the player's inventory
     Inventory* i = player->getInventory();

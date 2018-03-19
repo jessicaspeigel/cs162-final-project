@@ -78,6 +78,7 @@ void Game::startGame() {
                     printBoard();
                     break;
                 case 2 : // Show inventory
+                    student->getInventory()->printInventory();
                     break;
                 case 3 : // Show degree progress
                     showProgress();
@@ -162,14 +163,11 @@ void Game::createBoard() {
     gym = new Gym(student);
     advisorsOffice = new Quad(student);
     advisorsOffice->setName("Advisor's Office");
-    bar = new Quad(student);
-    bar->setName("Bar");
-    computerLab = new Quad(student);
-    computerLab->setName("Computer Lab");
+    bar = new Bar(student);
+    computerLab = new ComputerLab(student);
     quad = new Quad(student);
     library = new Library(student);
-    taOffice = new Quad(student);
-    taOffice->setName("TA's Office");
+    taOffice = new TAOffice(student);
     classroom = new Quad(student);
     classroom->setName("Classroom");
     cafe = new Cafe(student);

@@ -17,6 +17,9 @@
 #include "Gym.hpp"
 #include "Cafe.hpp"
 #include "Library.hpp"
+#include "ComputerLab.hpp"
+#include "Bar.hpp"
+#include "TAOffice.hpp"
 
 class Inventory;
 
