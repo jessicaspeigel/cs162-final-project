@@ -48,10 +48,14 @@ void ComputerLab::enter() {
     // Show the ComputerLab menu
     int menuChoice = spaceMenu->showMenu();
     if (menuChoice == 1) {
-        cout << "Great work, homework has been added to your inventory! You spent 10 mental health points." << endl;
-        p->adjustPoints(-10);
-        p->getInventory()->addItem("homework");
-        generateInventoryItems();
+        if (p->getInventory()->getInventoryCount() < p->getInventory()->getMaxItems()) {
+            cout << "Great work, homework has been added to your inventory! You spent 10 mental health points." << endl;
+            p->adjustPoints(-10);
+            p->getInventory()->addItem("homework");
+            generateInventoryItems();
+        } else {
+            cout << "You can't do homework right now, your inventory is full. Use some items or turn in homework in the Classroom." << endl;
+        }
     }
 }
 
