@@ -128,8 +128,8 @@ void Classroom::turnInHomework() {
     if (item->getCount() > 0) {
         // The user has homework to turn in
         item->setCount(item->getCount() - 1);
-        // Generate base credits between 15 and 20
-        int baseCredits = rand() % 15 + 5;
+        // Generate base credits between 20 and 30
+        int baseCredits = rand() % 20 + 10;
         cout << "You turned in homework for " << baseCredits << " credits." << endl;
         // Loop through the random events, storing the ones that happen in a vector
         vector<RandomEvent> events;
@@ -141,17 +141,20 @@ void Classroom::turnInHomework() {
                     randomEvents.at(i).probability *= 2;
                     appleFlag = false;
                 } else {
-                    randomEvents.at(i).probability = .3;
+                    randomEvents.at(i).probability = 30;
                 }
             }
             if (chance <= randomEvents.at(i).probability) {
                 // The event happened, push it into the vector
                 events.push_back(randomEvents.at(i));
-                cout << "Random event possible: " << randomEvents.at(i).eventName << endl;
+                //cout << "Random event possible: " << randomEvents.at(i).eventName << endl;
             }
         }
-        // Choose one event to go with
-        RandomEvent finalEvent = events.at(rand() % events.size());
+        // Choose one event to go with (but only if events.size() > 0)
+        RandomEvent finalEvent("Default", 0, 0);
+        if (!events.empty()) {
+            finalEvent = events.at(rand() % events.size());
+        }
         int creditImpact = baseCredits * finalEvent.gradeImpact;
         int credits = baseCredits + creditImpact;
         if (creditImpact < 0) {
@@ -160,7 +163,13 @@ void Classroom::turnInHomework() {
             // Handle losing work if the user has a floppy disk
             if (finalEvent.eventName == "lost your work") {
                 InventoryItem* floppyDisk = getPlayer()->getInventory()->findItemByValue("floppy disk");
-                if (floppyDisk->getCount() > 1) {
+                // DEBUG REMOVE
+                if (floppyDisk->getCount() < 1) {
+                    floppyDisk->setCount(1);
+                }
+
+                // DEBUG REMOVE
+                if (floppyDisk->getCount() > 0) {
                     // Tell the user the good news
                     cout << "Good news, you backed up your work on your floppy disk! You saved your " << abs(creditImpact) << " credits." << endl;
                     // Remove a floppy disk from the inventory

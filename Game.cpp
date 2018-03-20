@@ -68,6 +68,9 @@ void Game::startGame() {
     currentLocation = quad;
     // Show the menu
     int menuChoice = 0;
+    // Bools to hold win and lose conditions
+    bool win = false;
+    bool lose = false;
     // Start the program
     do {
         // Show the menu and get a choice
@@ -88,7 +91,12 @@ void Game::startGame() {
                     break;
             }
         }
-    } while (menuChoice != 5); // Choosing 5 equals quit
+        // Update stats
+        InventoryItem* diploma = student->getInventory()->findItemByValue("diploma");
+        win = diploma->getCount() > 0;
+        lose = student->getPoints() <= 0;
+    } while (menuChoice != 5 && !(win || lose)); // Choosing 5 equals quit
+    endGame();
 }
 
 /****************************************************
@@ -140,7 +148,12 @@ void Game::takeTurn() {
 ****************************************************/
 
 void Game::endGame() {
-
+    InventoryItem* diploma = student->getInventory()->findItemByValue("diploma");
+    if (diploma->getCount() > 0) {
+        AsciiArt winArt("WinArt.txt");
+    } else if (student->getPoints() <= 0) {
+        cout << "Game over" << endl;
+    }
 }
 
 /****************************************************
@@ -161,7 +174,7 @@ void Game::showProgress() {
 void Game::createBoard() {
     // Create the spaces
     gym = new Gym(student);
-    advisorsOffice = new Quad(student);
+    advisorsOffice = new AdvisorsOffice(student);
     advisorsOffice->setName("Advisor's Office");
     bar = new Bar(student);
     computerLab = new ComputerLab(student);

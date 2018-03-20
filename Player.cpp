@@ -65,4 +65,7 @@ void Player::adjustPoints(int offset) {
 
 void Player::adjustCredits(int offset) {
     this->credits += offset;
+    if (this->credits < 0) {
+        this->credits = 0;
+    }
 }

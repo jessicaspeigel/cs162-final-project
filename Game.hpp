@@ -21,6 +21,7 @@
 #include "Bar.hpp"
 #include "TAOffice.hpp"
 #include "Classroom.hpp"
+#include "AdvisorsOffice.hpp"
 
 class Inventory;
 

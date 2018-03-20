@@ -2,45 +2,47 @@
 ** Author: Jessica Speigel
 ** Assignment: CS162 cs162_final_project
 ** Date: 03/19/2018
-** Description: Declaration for Classroom class.
+** Description: Declaration for AdvisorsOffice class.
 ****************************************************/
 
-#ifndef CS162_FINAL_PROJECT_CLASSROOM_HPP
-#define CS162_FINAL_PROJECT_CLASSROOM_HPP
+#ifndef CS162_FINAL_PROJECT_ADVISORSOFFICE_HPP
+#define CS162_FINAL_PROJECT_ADVISORSOFFICE_HPP
 
 #include "Space.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include "AsciiArt.hpp"
 
-class Classroom : public Space {
+class AdvisorsOffice : public Space {
 
 private:
     // struct for random events
     struct RandomEvent {
         std::string eventName;
-        double gradeImpact;
+        int creditImpact;
+        int pointImpact;
         int probability;
         // Define a constructor
-        RandomEvent(std::string n, double i, int p) {
+        RandomEvent(std::string n, int credits, int points, int p) {
             eventName = n;
-            gradeImpact = i;
+            creditImpact = credits;
+            pointImpact = points;
             probability = p;
         }
     };
     std::vector<RandomEvent> randomEvents;
     bool appleFlag;
-    bool extraCreditFlag;
+    void winGame();
 
 public:
-    Classroom(Player* player);
-    ~Classroom();
+    AdvisorsOffice(Player* player);
+    ~AdvisorsOffice();
     void enter();
     void generateInventoryItems();
     void useApple();
-    void useExtraCredit();
-    void turnInHomework();
+    void applyForGraduation();
 
 };
 
-#endif //CS162_FINAL_PROJECT_CLASSROOM_HPP
+#endif //CS162_FINAL_PROJECT_ADVISORSOFFICE_HPP
