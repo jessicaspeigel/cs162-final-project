@@ -21,7 +21,7 @@ ComputerLab::ComputerLab(Player* player) : Space("Computer Lab", player) {
     vector<string> spaceMenuItems;
     spaceMenuItems.push_back("Do homework");
     spaceMenuItems.push_back(exitString);
-    string promptText = "You entered the " + this->getName() + ". What would you like to do?";
+    string promptText = "Welcome to the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
     spaceMenu->setMenuItems(spaceMenuItems);
     // Register the inventory items that can appear in this space (floppy disk and extra credit)
@@ -69,7 +69,7 @@ void ComputerLab::generateInventoryItems() {
     if (i->getInventoryCount() < i->getMaxItems()) {
         int floppyDiskChance = rand() % 100 + 1;
         if (floppyDiskChance <= floppyDisk->getFrequency()) {
-            i->addItem("apple");
+            i->addItem("floppy disk");
             // Only use plural if it's appropriate
             string fdPluralForm;
             if (floppyDisk->getCount() > 1) {

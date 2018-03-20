@@ -26,7 +26,7 @@ Space::Space(string name, Player* player) {
     // Set the space name
     setName(name);
     // Exit string is the text used for exiting the space (inherited by all child classes)
-    exitString = "Exit " + this->getName();
+    exitString = "Return to main menu";
     // Create a bare bones space menu
     vector<string> spaceMenuItems;
     spaceMenuItems.push_back(exitString);

@@ -21,7 +21,7 @@ Library::Library(Player* player) : Space("Library", player) {
     vector<string> spaceMenuItems;
     spaceMenuItems.push_back("Study");
     spaceMenuItems.push_back(exitString);
-    string promptText = "You entered the " + this->getName() + ". What would you like to do?";
+    string promptText = "Welcome to the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
     spaceMenu->setMenuItems(spaceMenuItems);
     // Register the inventory items that can appear in this space (apple and extra credit)
@@ -85,7 +85,7 @@ void Library::generateInventoryItems() {
             i->addItem("extra credit");
             // Only use plural if it's appropriate
             string ecPluralForm;
-            if (apples->getCount() > 1) {
+            if (extraCredit->getCount() > 1) {
                 ecPluralForm = " chances";
             } else {
                 ecPluralForm = " chance";

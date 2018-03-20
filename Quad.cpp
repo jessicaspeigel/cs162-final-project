@@ -31,7 +31,7 @@ Quad::~Quad() {
 ****************************************************/
 
 void Quad::enter() {
-    cout << "Entered " << this->getName() << endl;
+    cout << "Welcome to the " << this->getName() << endl;
 }
 
 /****************************************************

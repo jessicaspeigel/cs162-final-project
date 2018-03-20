@@ -21,7 +21,7 @@ Cafe::Cafe(Player *player) : Space("Cafe", player) {
     vector<string> spaceMenuItems;
     spaceMenuItems.push_back("Buy coffee?");
     spaceMenuItems.push_back(exitString);
-    string promptText = "You entered the " + this->getName() + ". What would you like to do?";
+    string promptText = "Welcome to the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
     spaceMenu->setMenuItems(spaceMenuItems);
 }

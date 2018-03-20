@@ -168,8 +168,7 @@ void Game::createBoard() {
     quad = new Quad(student);
     library = new Library(student);
     taOffice = new TAOffice(student);
-    classroom = new Quad(student);
-    classroom->setName("Classroom");
+    classroom = new Classroom(student);
     cafe = new Cafe(student);
     // Link the gym
     gym->setRight(advisorsOffice);

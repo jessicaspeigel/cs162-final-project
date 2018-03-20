@@ -20,6 +20,7 @@
 #include "ComputerLab.hpp"
 #include "Bar.hpp"
 #include "TAOffice.hpp"
+#include "Classroom.hpp"
 
 class Inventory;
 

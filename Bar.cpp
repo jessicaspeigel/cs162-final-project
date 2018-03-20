@@ -21,7 +21,7 @@ Bar::Bar(Player* player) : Space("Bar", player) {
     vector<string> spaceMenuItems;
     spaceMenuItems.push_back("Get happy hour");
     spaceMenuItems.push_back(exitString);
-    string promptText = "You entered the " + this->getName() + ". What would you like to do?";
+    string promptText = "Welcome to the " + this->getName() + ". What would you like to do?";
     spaceMenu->setPromptText(promptText);
     spaceMenu->setMenuItems(spaceMenuItems);
 }
